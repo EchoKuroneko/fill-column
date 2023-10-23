@@ -36,32 +36,28 @@ The `FillColumn` function enables users to automate this process, enhancing effi
 ### Function
 
 ```javascript
-FillColumn(dataRange,repetition,sheetName)
+FillColumn(range, repetition)
 ```
 
 ### Parameters
 
-- dataRange (${\color{lime}required}$) : Range of the data set that will be used to fill i.e `helper column` (e.g., "B1:B10")
+- range (${\color{lime}required}$) : Range of the data set that will be used to fill i.e `helper column` (e.g., `B1:B10` or `Sheet1!B1:B10`)
 
-  ${\color{lightblue}Input}$ : `string`
+  ${\color{lightblue}Input}$ : `cell_reference`
 
 - repetition (${\color{lime}required}$) : Number of times to repeat the same value
     
-    ${\color{lightblue}Input}$ : `integer`
-
-- sheetName (${\color{orange}optional}$) : Name of the sheet to be used.
-
-    ${\color{lightgreen}Default}$ : Active Sheet
+  ${\color{lightblue}Input}$ : `integer`
     
 > [!NOTE]
-> The range parameter must be provided as a string within the formula and the function uses the active sheet if no sheet name is provided.
+> The range parameter must be provided as a cell reference within the formula and USES the active sheet if no sheet name is mentioned in the cell reference (range).
 
 ### Example
 
 ```
-=FillColumn("B1:B10", 10, "Sheet1")
+=FillColumn(B1:B10, 10)
 ```
 Or,
 ```
-=FillColumn("B1:B10", 10)
+=FillColumn(Sheet1!B1:B7, 23)
 ```
