@@ -1,9 +1,26 @@
-function FillColumn(dataRange, repetition, sheetName){
+function FillColumn(dataRange, repetition){
     // Get the active spreadsheet
     var ss = SpreadsheetApp.getActiveSpreadsheet();
 
-    // If sheetName is provided, get the sheet with that name, else get the active sheet
-    var sheet = sheetName ? ss.getSheetByName(sheetName) : ss.getActiveSheet();
+    // Get the formula of the active range
+    var formula = SpreadsheetApp.getActiveRange().getFormula();
+    
+    // Extract the arguments from the formula
+    var args = formula.match(/=\w+\((.*)\)/i)[1].split(',');
+
+    // Extract sheet name and range from the arguments
+    var args = args[0].split('!');
+
+    // If sheet name is provided, get the sheet with that name, else get the active sheet
+    if (args.length === 2) {
+      var sheetName = args[0].replace(/^'/, '').replace(/'$/, '');
+      var dataRange = args[1];
+      var sheet = ss.getSheetByName(sheetName);
+    }
+    else {
+      dataRange = args[0];
+      sheet = ss.getActiveSheet();
+    }
     
     // Get the range object based on the provided dataArrayRange
     var selectedRange = sheet.getRange(dataRange);
